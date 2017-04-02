@@ -79,3 +79,4 @@ class ArithmeticSequnce:
 
 s = ArithmeticSequnce(1,2)
 print s[4]
+
