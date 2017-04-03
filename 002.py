@@ -80,3 +80,53 @@ class ArithmeticSequnce:
 s = ArithmeticSequnce(1,2)
 print s[4]
 
+class CounterList(list):
+    def __init__(self, *args):
+        super(CounterList, self).__init__(*args)
+        self.counter=0
+
+    def __getitem__(self, index):
+        self.counter+=1
+        return super(CounterList,self).__getitem__(index)
+
+c = CounterList(range(10))
+print c[4]
+print c.counter
+
+class Rectangle:
+    def __init__(self):
+        self.width = 0
+        self.height = 0
+    def setSize(self, size):
+        self.width, self.height = size
+    def getSize(self):
+        return self.width, self.height
+    size = property(getSize, setSize)
+r = Rectangle()
+r.width = 10
+r.height = 100
+print r.size
+r.size = (200,100)
+print r.width
+print r.height
+
+
+class Rectangle2:
+    def __init__(self):
+        self.width = 0
+        self.height = 0
+    def __setattr__(self, key, value):
+        if key == "size":
+            self.width, self.height = value
+        else:
+            self.__dict__[key] = value
+    def __getattr__(self, item):
+        if item == "size":
+            return self.width, self.height
+        else:
+            raise AttributeError
+
+r2 = Rectangle2()
+r2.size = (2,2)
+print r2.width
+print r2.height
